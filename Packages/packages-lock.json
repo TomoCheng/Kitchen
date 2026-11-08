@@ -8,7 +8,7 @@
       "hash": "a9e27c03d411d2fca01cc7410c24c97cd77cb539"
     },
     "com.tomo.framework": {
-      "version": "file:TomoFramework",
+      "version": "file:com.tomo.framework",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -125,6 +125,13 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
       "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
