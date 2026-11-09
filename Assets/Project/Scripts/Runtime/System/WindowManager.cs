@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Tomo.Core;
+using UnityEngine;
 
-namespace Kitchen.System
+namespace Kitchen.Systems
 {
 	public class WindowManager : Singleton<WindowManager>
 	{
