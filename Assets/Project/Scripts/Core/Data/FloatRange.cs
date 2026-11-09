@@ -11,11 +11,11 @@ namespace Kitchen.Core.Data
 		{
 			if (float.IsNaN(lo) || float.IsNaN(hi))
 			{
-				throw new ArgumentException($"FloatRange bounds must not be NaN (lo={lo}, hi={hi}).");
+				throw new ArgumentException(FormattableString.Invariant($"FloatRange bounds must not be NaN (lo={lo}, hi={hi})."));
 			}
 			if (lo > hi)
 			{
-				throw new ArgumentException($"FloatRange requires lo <= hi (lo={lo}, hi={hi}).");
+				throw new ArgumentException(FormattableString.Invariant($"FloatRange requires lo <= hi (lo={lo}, hi={hi})."));
 			}
 
 			Lo = lo;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Kitchen.Core.Data;
 using Kitchen.Core.Definitions;
 using Newtonsoft.Json;
@@ -239,9 +240,20 @@ namespace Kitchen.Core.Tests
 		{
 			string entry = Replaced(TomatoEggEntry, "[2.5,6.5]", "[6.5,2.5]");
 
-			var ex = ThrowsOne(entry);
+			// de-DE 的小數點是逗號；訊息若誤用目前文化會變成 "6,5"
+			CultureInfo previous = CultureInfo.CurrentCulture;
+			try
+			{
+				CultureInfo.CurrentCulture = new CultureInfo("de-DE");
 
-			StringAssert.Contains("[6.5, 2.5]", ex.Message);
+				var ex = ThrowsOne(entry);
+
+				StringAssert.Contains("[6.5, 2.5]", ex.Message);
+			}
+			finally
+			{
+				CultureInfo.CurrentCulture = previous;
+			}
 		}
 
 		// ---- anchors ----
@@ -341,6 +353,8 @@ namespace Kitchen.Core.Tests
 		[Test]
 		public void ParseDishes_ValidDish_RouteCapsHoldOnlySpecializedRoutes()
 		{
+			// 正常路徑的健全性檢查：合法資料解析後 RouteCaps 只含特化路線。
+			// M1 的回歸保護在 ParseDishes_RouteCapsContainsBalanced_Throws 與 DishDataTests.Constructor_NonSpecializedRouteCap_Throws。
 			DishData dish = ParseOne(TomatoEggEntry)[0];
 
 			foreach (string route in dish.RouteCaps.Keys)
@@ -591,7 +605,35 @@ namespace Kitchen.Core.Tests
 		[Test]
 		public void ToString_UsesInvariantCulture()
 		{
-			Assert.AreEqual("[2.5, 6.5]", new FloatRange(2.5f, 6.5f).ToString());
+			CultureInfo previous = CultureInfo.CurrentCulture;
+			try
+			{
+				CultureInfo.CurrentCulture = new CultureInfo("de-DE");
+
+				Assert.AreEqual("[2.5, 6.5]", new FloatRange(2.5f, 6.5f).ToString());
+			}
+			finally
+			{
+				CultureInfo.CurrentCulture = previous;
+			}
+		}
+
+		[Test]
+		public void Constructor_LoGreaterThanHi_MessageUsesInvariantCulture()
+		{
+			CultureInfo previous = CultureInfo.CurrentCulture;
+			try
+			{
+				CultureInfo.CurrentCulture = new CultureInfo("de-DE");
+
+				var ex = Assert.Throws<ArgumentException>(() => new FloatRange(6.5f, 2.5f));
+
+				StringAssert.Contains("lo=6.5, hi=2.5", ex.Message);
+			}
+			finally
+			{
+				CultureInfo.CurrentCulture = previous;
+			}
 		}
 	}
 }
