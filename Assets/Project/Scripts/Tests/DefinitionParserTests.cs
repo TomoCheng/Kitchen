@@ -89,7 +89,7 @@ namespace Kitchen.Core.Tests
 
 			var ex = Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients(json));
 
-			StringAssert.Contains("#1", ex.Message);
+			StringAssert.Contains("entry 2 (id <none>)", ex.Message);
 			StringAssert.Contains("'id'", ex.Message);
 		}
 
@@ -110,9 +110,9 @@ namespace Kitchen.Core.Tests
 
 			var ex = Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients(json));
 
-			StringAssert.Contains("#2", ex.Message);
-			StringAssert.Contains("tomato", ex.Message);
+			StringAssert.Contains("entry 3 (id 'tomato')", ex.Message);
 			StringAssert.Contains("duplicate", ex.Message);
+			StringAssert.Contains("first defined at entry 1", ex.Message);
 		}
 
 		[Test]
@@ -160,7 +160,8 @@ namespace Kitchen.Core.Tests
 
 			var ex = Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients(json));
 
-			StringAssert.Contains("#1", ex.Message);
+			StringAssert.Contains("entry 2 (id <none>)", ex.Message);
+			StringAssert.Contains("null", ex.Message);
 		}
 
 		// ---- 非法 JSON ----
@@ -199,6 +200,56 @@ namespace Kitchen.Core.Tests
 		public void Parse_NullOrEmptyInput_Throws(string json)
 		{
 			Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients(json));
+		}
+
+		// ---- 輸入前處理 / 全域設定隔離 ----
+
+		[Test]
+		public void Parse_LeadingUtf8Bom_IsStripped()
+		{
+			string json = "\uFEFF" + J("[" + TomatoEntry + "]");
+
+			IReadOnlyList<IngredientData> list = DefinitionParser.ParseIngredients(json);
+
+			Assert.AreEqual(1, list.Count);
+			Assert.AreEqual("tomato", list[0].Id);
+		}
+
+		[Test]
+		public void Parse_BomOnly_Throws()
+		{
+			Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients("\uFEFF"));
+		}
+
+		[Test]
+		public void Parse_TrailingContentAfterArray_Throws()
+		{
+			string json = J("[" + TomatoEntry + "]") + " []";
+
+			var ex = Assert.Throws<DefinitionException>(() => DefinitionParser.ParseIngredients(json));
+
+			Assert.IsInstanceOf<JsonException>(ex.InnerException);
+		}
+
+		[Test]
+		public void Parse_IgnoresGlobalJsonConvertDefaultSettings()
+		{
+			Func<JsonSerializerSettings> previous = JsonConvert.DefaultSettings;
+			try
+			{
+				JsonConvert.DefaultSettings = JsonTestUtil.HostileDefaultSettings;
+				string json = J("[" + TomatoEntry.Replace("'rarity':1,", "'rarity':1,'future_field':42,") + "]");
+
+				IngredientData tomato = DefinitionParser.ParseIngredients(json)[0];
+
+				Assert.AreEqual("tomato", tomato.Id);
+				Assert.AreEqual(new FlavorVector(2, 1, 0, 0, 0), tomato.Flavor);
+				CollectionAssert.AreEqual(new[] { "vegetable", "tomato_family", "sour_family" }, tomato.Categories);
+			}
+			finally
+			{
+				JsonConvert.DefaultSettings = previous;
+			}
 		}
 
 		// ---- IngredientData 建構子防呆 ----
