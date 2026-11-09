@@ -1,0 +1,32 @@
+[
+  {
+    "id": "tomato_egg_stirfry",
+    "name_key": "dish.tomato_egg_stirfry.name",
+    "anchors": [["egg_family"], ["tomato_family"]],
+    "allowed_routes": ["sour", "salty", "balanced"],
+    "route_caps": { "sour": 10, "salty": 10 },
+    "balanced_band": [2.5, 6.5],
+    "base_price": 50,
+    "specificity": 2
+  },
+  {
+    "id": "spicy_egg_stirfry",
+    "name_key": "dish.spicy_egg_stirfry.name",
+    "anchors": [["egg_family"], ["chili_family"]],
+    "allowed_routes": ["spicy", "salty", "balanced"],
+    "route_caps": { "spicy": 10, "salty": 10 },
+    "balanced_band": [2.5, 6.5],
+    "base_price": 55,
+    "specificity": 2
+  },
+  {
+    "id": "sweet_onion_egg",
+    "name_key": "dish.sweet_onion_egg.name",
+    "anchors": [["egg_family"], ["onion_family"]],
+    "allowed_routes": ["sweet", "spicy", "balanced"],
+    "route_caps": { "sweet": 10, "spicy": 10 },
+    "balanced_band": [2.5, 6.5],
+    "base_price": 55,
+    "specificity": 2
+  }
+]

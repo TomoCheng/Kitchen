@@ -1,0 +1,14 @@
+{
+  "ingredient.tomato.name": "番茄",
+  "ingredient.egg.name": "蛋",
+  "ingredient.sugar.name": "糖",
+  "ingredient.salt.name": "鹽",
+  "ingredient.lemon.name": "檸檬",
+  "ingredient.soy_sauce.name": "醬油",
+  "ingredient.onion.name": "洋蔥",
+  "ingredient.chili.name": "辣椒",
+  "ingredient.bitter_melon.name": "苦瓜",
+  "dish.tomato_egg_stirfry.name": "番茄炒蛋",
+  "dish.spicy_egg_stirfry.name": "香辣炒蛋",
+  "dish.sweet_onion_egg.name": "洋蔥甜炒蛋"
+}

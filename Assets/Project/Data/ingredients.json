@@ -1,0 +1,92 @@
+[
+  {
+    "id": "tomato",
+    "name_key": "ingredient.tomato.name",
+    "categories": ["vegetable", "tomato_family", "sour_family"],
+    "flavor": { "sour": 2, "sweet": 1, "bitter": 0, "salty": 0, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 12,
+    "sell_price": 3,
+    "sprite": "S_Ingredient_Tomato"
+  },
+  {
+    "id": "egg",
+    "name_key": "ingredient.egg.name",
+    "categories": ["protein", "egg_family"],
+    "flavor": { "sour": 0, "sweet": 0, "bitter": 0, "salty": 0, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 10,
+    "sell_price": 3,
+    "sprite": "S_Ingredient_Egg"
+  },
+  {
+    "id": "sugar",
+    "name_key": "ingredient.sugar.name",
+    "categories": ["seasoning", "sugar_family", "sweet_family"],
+    "flavor": { "sour": 0, "sweet": 2, "bitter": 0, "salty": 0, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 8,
+    "sell_price": 2,
+    "sprite": "S_Ingredient_Sugar"
+  },
+  {
+    "id": "salt",
+    "name_key": "ingredient.salt.name",
+    "categories": ["seasoning", "salt_family", "salty_family"],
+    "flavor": { "sour": 0, "sweet": 0, "bitter": 0, "salty": 2, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 8,
+    "sell_price": 2,
+    "sprite": "S_Ingredient_Salt"
+  },
+  {
+    "id": "lemon",
+    "name_key": "ingredient.lemon.name",
+    "categories": ["fruit", "lemon_family", "sour_family"],
+    "flavor": { "sour": 3, "sweet": 0, "bitter": 0, "salty": 0, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 16,
+    "sell_price": 4,
+    "sprite": "S_Ingredient_Lemon"
+  },
+  {
+    "id": "soy_sauce",
+    "name_key": "ingredient.soy_sauce.name",
+    "categories": ["seasoning", "soy_family", "salty_family"],
+    "flavor": { "sour": 0, "sweet": 1, "bitter": 0, "salty": 2, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 14,
+    "sell_price": 4,
+    "sprite": "S_Ingredient_SoySauce"
+  },
+  {
+    "id": "onion",
+    "name_key": "ingredient.onion.name",
+    "categories": ["vegetable", "onion_family"],
+    "flavor": { "sour": 0, "sweet": 1, "bitter": 0, "salty": 0, "spicy": 1 },
+    "rarity": 1,
+    "buy_price": 12,
+    "sell_price": 3,
+    "sprite": "S_Ingredient_Onion"
+  },
+  {
+    "id": "chili",
+    "name_key": "ingredient.chili.name",
+    "categories": ["vegetable", "chili_family", "spicy_family"],
+    "flavor": { "sour": 0, "sweet": 0, "bitter": 0, "salty": 0, "spicy": 2 },
+    "rarity": 1,
+    "buy_price": 14,
+    "sell_price": 4,
+    "sprite": "S_Ingredient_Chili"
+  },
+  {
+    "id": "bitter_melon",
+    "name_key": "ingredient.bitter_melon.name",
+    "categories": ["vegetable", "bittermelon_family"],
+    "flavor": { "sour": 0, "sweet": 0, "bitter": 2, "salty": 0, "spicy": 0 },
+    "rarity": 1,
+    "buy_price": 10,
+    "sell_price": 3,
+    "sprite": "S_Ingredient_BitterMelon"
+  }
+]
